@@ -1,0 +1,7 @@
+{
+    "projects": [{
+        "name": "juicebox",
+        "path": "./contract.tact",
+        "output": "./output"
+    }]
+}

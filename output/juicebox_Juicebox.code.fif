@@ -1,0 +1,967 @@
+PROGRAM{
+  DECLPROC __tact_my_balance
+  DECLPROC __tact_not_null
+  DECLPROC __tact_context_get
+  DECLPROC __tact_verify_address
+  DECLPROC __tact_store_bool
+  DECLPROC __tact_load_address
+  DECLPROC __tact_load_address_opt
+  DECLPROC __tact_store_address
+  DECLPROC __tact_store_address_opt
+  DECLPROC __tact_create_address
+  DECLPROC __tact_compute_contract_address
+  DECLPROC __tact_address_eq
+  DECLPROC __tact_dict_set_code
+  DECLPROC __tact_dict_get_code
+  DECLPROC __tact_string_builder_start
+  DECLPROC __tact_string_builder_start_comment
+  DECLPROC __tact_string_builder_end
+  DECLPROC __tact_string_builder_append
+  DECLPROC __gen_read_Deploy
+  DECLPROC __gen_write_DeployOk
+  DECLPROC __gen_writecell_DeployOk
+  DECLPROC __gen_write_TokenTransferInternal
+  DECLPROC __gen_writecell_TokenTransferInternal
+  DECLPROC __gen_read_TokenBurnNotification
+  DECLPROC __gen_write_TokenExcesses
+  DECLPROC __gen_writecell_TokenExcesses
+  DECLPROC __gen_read_TokenUpdateContent
+  DECLPROC __gen_write_Juicebox
+  DECLPROC __gen_read_Juicebox
+  DECLPROC __gen_StateInit_get_code
+  DECLPROC __gen_Context_get_sender
+  DECLPROC __gen_JettonData_to_external
+  DECLPROC __gen_write_$init$JettonDefaultWallet
+  DECLPROC __gen_read_$init$Juicebox
+  DECLPROC $__gen_Juicebox_init
+  DECLPROC __gen_load_Juicebox
+  DECLPROC __gen_store_Juicebox
+  DECLPROC $emptyCell
+  DECLPROC $__gen_Cell_asSlice
+  DECLPROC $emptySlice
+  DECLPROC $contractAddress
+  DECLPROC $send
+  DECLPROC __gen_constructor_SendParameters$bounce_to_value_mode_body
+  DECLPROC $reply
+  DECLPROC $__gen_String_asComment
+  DECLPROC $__gen_JettonDefaultWallet_init_child
+  DECLPROC __gen_constructor_TokenTransferInternal$amount_queryId_from_responseAddress_forwardTonAmount_forwardPayload
+  DECLPROC __gen_constructor_TokenExcesses$queryId
+  DECLPROC __gen_constructor_SendParameters$to_value_mode_bounce_body
+  DECLPROC $__gen_Juicebox_totalSupply
+  86140 DECLMETHOD $__gen_get_totalSupply
+  DECLPROC $__gen_Juicebox_getJettonWalletInit
+  DECLPROC $__gen_Juicebox_get_wallet_address
+  103289 DECLMETHOD $__gen_get_get_wallet_address
+  DECLPROC __gen_constructor_JettonData$totalSupply_mintable_owner_content_walletCode
+  DECLPROC $__gen_Juicebox_get_jetton_data
+  106029 DECLMETHOD $__gen_get_get_jetton_data
+  DECLPROC __gen_constructor_SendParameters$to_value_bounce_mode_body_code_data
+  DECLPROC $__gen_Juicebox_mint
+  DECLPROC $__gen_Juicebox_requireWallet
+  DECLPROC $__gen_Juicebox_requireOwner
+  DECLPROC $__gen_Juicebox_owner
+  83229 DECLMETHOD $__gen_get_owner
+  DECLPROC $__gen_Juicebox_receive_comment_9d1f20fd138571b201f1cd0e2c813341ccf7045ff4cd72d87090ee0d56bc420a
+  DECLPROC $__gen_Juicebox_receive_comment_095190194aee611ce895c5503adf85fd864de7905746142f608d3eb2faad14e4
+  DECLPROC $__gen_Juicebox_receive_comment_001cb8d0f1dda451ba4491557c0ba97434ca5be2885df09f4513fdb2238af381
+  DECLPROC __gen_constructor_DeployOk$queryId
+  DECLPROC $__gen_Juicebox_receive_Deploy
+  DECLPROC $__gen_Juicebox_receive_TokenUpdateContent
+  DECLPROC __gen_constructor_SendParameters$to_value_bounce_mode_body
+  DECLPROC $__gen_Juicebox_receive_TokenBurnNotification
+  DECLPROC __gen_router_Juicebox
+  DECLPROC recv_internal
+  113617 DECLMETHOD supported_interfaces
+  DECLPROC get_abi_ipfs
+  DECLPROC lazy_deployment_completed
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sys
+  __tact_my_balance PROCINLINE:<{
+    BALANCE
+    FIRST
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_verify_address PROCINLINE:<{
+    SBITS
+    267 PUSHINT
+    NEQ
+    136 THROWIFNOT
+  }>
+  __tact_store_bool PROCINLINE:<{
+    SWAP
+    1 STI
+  }>
+  __tact_load_address PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  __tact_load_address_opt PROCINLINE:<{
+    LDMSGADDR
+    OVER
+    2 PLDU
+    0 NEQINT
+    IF:<{
+      SWAP
+    }>ELSE<{
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_store_address PROCINLINE:<{
+    STSLICER
+  }>
+  __tact_store_address_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      0 PUSHINT
+      SWAP
+      2 STU
+    }>ELSE<{
+      __tact_store_address INLINECALLDICT
+    }>
+  }>
+  __tact_create_address PROCINLINE:<{
+    NEWC
+    2 PUSHINT
+    SWAP
+    2 STU
+    0 PUSHINT
+    SWAP
+    1 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+    ENDC
+    CTOS
+  }>
+  __tact_compute_contract_address PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    2 STU
+    3 PUSHINT
+    SWAP
+    2 STU
+    0 PUSHINT
+    SWAP
+    1 STU
+    s1 s2 XCHG
+    STREF
+    STREF
+    ENDC
+    HASHCU
+    __tact_create_address INLINECALLDICT
+  }>
+  __tact_address_eq PROCINLINE:<{
+    SDEQ
+  }>
+  __tact_dict_set_code PROCINLINE:<{
+    s0 s2 XCHG
+    16 PUSHINT
+    DICTUSETREF
+  }>
+  __tact_dict_get_code PROCINLINE:<{
+    SWAP
+    16 PUSHINT
+    DICTUGETREF
+    NULLSWAPIFNOT
+    135 THROWIFNOT
+  }>
+  __tact_string_builder_start PROCINLINE:<{
+    NIL
+    SWAP
+    TPUSH
+    PUSHNULL
+    TPUSH
+  }>
+  __tact_string_builder_start_comment PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    32 STU
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_end PROCINLINE:<{
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
+  }>
+  __tact_string_builder_append PROCREF:<{
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s3 s3 XCHG2
+        STSLICER
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
+  }>
+  __gen_read_Deploy PROCINLINE:<{
+    32 LDU
+    SWAP
+    2490013878 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    64 LDU
+    SWAP
+  }>
+  __gen_write_DeployOk PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  __gen_writecell_DeployOk PROCINLINE:<{
+    NEWC
+    SWAP
+    __gen_write_DeployOk INLINECALLDICT
+    ENDC
+  }>
+  __gen_write_TokenTransferInternal PROCREF:<{
+    395134233 PUSHINT
+    s0 s7 XCHG2
+    32 STU
+    s1 s5 XCHG
+    64 STU
+    s0 s3 XCHG2
+    STGRAMS
+    SWAP
+    __tact_store_address INLINECALLDICT
+    SWAP
+    __tact_store_address_opt INLINECALLDICT
+    SWAP
+    STGRAMS
+    SWAP
+    STSLICER
+  }>
+  __gen_writecell_TokenTransferInternal PROCINLINE:<{
+    NEWC
+    6 -ROLL
+    __gen_write_TokenTransferInternal INLINECALLDICT
+    ENDC
+  }>
+  __gen_read_TokenBurnNotification PROCINLINE:<{
+    32 LDU
+    SWAP
+    2078119902 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    64 LDU
+    LDGRAMS
+    __tact_load_address INLINECALLDICT
+    SWAP
+    __tact_load_address_opt INLINECALLDICT
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+  }>
+  __gen_write_TokenExcesses PROCINLINE:<{
+    3576854235 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  __gen_writecell_TokenExcesses PROCINLINE:<{
+    NEWC
+    SWAP
+    __gen_write_TokenExcesses INLINECALLDICT
+    ENDC
+  }>
+  __gen_read_TokenUpdateContent PROCINLINE:<{
+    32 LDU
+    SWAP
+    201882270 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    SWAP
+  }>
+  __gen_write_Juicebox PROCINLINE:<{
+    s5 s4 XCHG2
+    STGRAMS
+    ROT
+    __tact_store_address INLINECALLDICT
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      SWAP
+      1 STI
+      STREF
+    }>ELSE<{
+      FALSE
+      s2 POP
+      1 STI
+    }>
+    s1 s2 XCHG
+    1 STI
+    257 PUSHINT
+    STIX
+  }>
+  __gen_read_Juicebox PROCINLINE:<{
+    LDGRAMS
+    __tact_load_address INLINECALLDICT
+    SWAP
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    257 PUSHINT
+    LDIX
+    5 -ROLL
+  }>
+  __gen_StateInit_get_code PROCINLINE:<{
+    DROP
+  }>
+  __gen_Context_get_sender PROCINLINE:<{
+    s2 s3 XCHG
+    3 BLKDROP
+  }>
+  __gen_JettonData_to_external PROCINLINE:<{
+  }>
+  __gen_write_$init$JettonDefaultWallet PROCINLINE:<{
+    -ROT
+    __tact_store_address INLINECALLDICT
+    SWAP
+    __tact_store_address INLINECALLDICT
+  }>
+  __gen_read_$init$Juicebox PROCINLINE:<{
+    __tact_load_address INLINECALLDICT
+    SWAP
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    -ROT
+  }>
+  $__gen_Juicebox_init PROCREF:<{
+    0 PUSHINT
+    -ROT
+    TRUE
+    1 PUSHINT
+  }>
+  __gen_load_Juicebox PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    LDREF
+    SWAP
+    __tact_context_sys SETGLOB
+    1 LDI
+    SWAP
+    IF:<{
+      __gen_read_Juicebox INLINECALLDICT
+      1 5 BLKDROP2
+    }>ELSE<{
+      __gen_read_$init$Juicebox INLINECALLDICT
+      s0 s2 XCHG
+      ENDS
+      SWAP
+      $__gen_Juicebox_init INLINECALLDICT
+    }>
+  }>
+  __gen_store_Juicebox PROCINLINE:<{
+    NEWC
+    __tact_context_sys GETGLOB
+    SWAP
+    STREF
+    TRUE
+    SWAP
+    1 STI
+    5 -ROLL
+    __gen_write_Juicebox INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $emptyCell PROCREF:<{
+    NEWC
+    ENDC
+  }>
+  $__gen_Cell_asSlice PROCREF:<{
+    CTOS
+  }>
+  $emptySlice PROCREF:<{
+    $emptyCell INLINECALLDICT
+    $__gen_Cell_asSlice INLINECALLDICT
+  }>
+  $contractAddress PROCREF:<{
+    0 PUSHINT
+    -ROT
+    __tact_compute_contract_address INLINECALLDICT
+  }>
+  $send PROCREF:<{
+    NEWC
+    1 PUSHINT
+    SWAP
+    2 STI
+    s0 s7 XCHG2
+    __tact_store_bool INLINECALLDICT
+    0 PUSHINT
+    SWAP
+    3 STI
+    s0 s5 XCHG2
+    __tact_store_address INLINECALLDICT
+    s0 s3 XCHG2
+    STGRAMS
+    0 PUSHINT
+    SWAP
+    105 STI
+    s3 PUSH
+    ISNULL
+    NOT
+    s5 PUSH
+    ISNULL
+    NOT
+    OR
+    IF:<{
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      NEWC
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+        TRUE
+        __tact_store_bool INLINECALLDICT
+        s0 s4 XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s4 XCHG2
+        STREF
+      }>ELSE<{
+        s4 POP
+        s0 s3 XCHG
+        FALSE
+        __tact_store_bool INLINECALLDICT
+      }>
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+        TRUE
+        __tact_store_bool INLINECALLDICT
+        s0 s4 XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s4 XCHG2
+        STREF
+      }>ELSE<{
+        s4 POP
+        s0 s3 XCHG
+        FALSE
+        __tact_store_bool INLINECALLDICT
+      }>
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      s0 s2 XCHG
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      s0 s2 XCHG
+      ENDC
+      ROT
+      STREF
+    }>ELSE<{
+      s3 POP
+      s3 POP
+      SWAP
+      FALSE
+      __tact_store_bool INLINECALLDICT
+    }>
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      SWAP
+      __tact_not_null INLINECALLDICT
+      SWAP
+      STREF
+    }>ELSE<{
+      NIP
+      FALSE
+      __tact_store_bool INLINECALLDICT
+    }>
+    ENDC
+    SWAP
+    SENDRAWMSG
+  }>
+  __gen_constructor_SendParameters$bounce_to_value_mode_body PROCINLINE:<{
+    PUSHNULL
+    PUSHNULL
+  }>
+  $reply PROCREF:<{
+    __tact_context_get INLINECALLDICT
+    s2 s3 XCHG
+    3 BLKDROP
+    TRUE
+    0 PUSHINT
+    s0 s3 XCHG2
+    66 PUSHINT
+    SWAP
+    __gen_constructor_SendParameters$bounce_to_value_mode_body INLINECALLDICT
+    $send INLINECALLDICT
+  }>
+  $__gen_String_asComment PROCREF:<{
+    __tact_string_builder_start_comment INLINECALLDICT
+    SWAP
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $__gen_JettonDefaultWallet_init_child PROC:<{
+    s0 s2 XCHG
+    CTOS
+    LDDICT
+    DROP
+    NEWDICT
+    SWAP
+    55471 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    SWAP
+    55471 PUSHINT
+    s2 PUSH
+    __tact_dict_set_code INLINECALLDICT
+    NEWC
+    SWAP
+    NEWC
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    FALSE
+    SWAP
+    1 STI
+    s0 s0 s3 XCHG3
+    __gen_write_$init$JettonDefaultWallet INLINECALLDICT
+    ENDC
+  }>
+  __gen_constructor_TokenTransferInternal$amount_queryId_from_responseAddress_forwardTonAmount_forwardPayload PROCINLINE:<{
+    s4 s5 XCHG
+  }>
+  __gen_constructor_TokenExcesses$queryId PROCINLINE:<{
+  }>
+  __gen_constructor_SendParameters$to_value_mode_bounce_body PROCINLINE:<{
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+    PUSHNULL
+    PUSHNULL
+  }>
+  $__gen_Juicebox_totalSupply PROCREF:<{
+    4 BLKDROP
+  }>
+  $__gen_get_totalSupply PROC:<{
+    __gen_load_Juicebox INLINECALLDICT
+    $__gen_Juicebox_totalSupply INLINECALLDICT
+  }>
+  $__gen_Juicebox_getJettonWalletInit PROCREF:<{
+    __tact_context_sys GETGLOB
+    MYADDR
+    ROT
+    $__gen_JettonDefaultWallet_init_child CALLDICT
+  }>
+  $__gen_Juicebox_get_wallet_address PROCREF:<{
+    $__gen_Juicebox_getJettonWalletInit INLINECALLDICT
+    5 2 BLKDROP2
+    $contractAddress INLINECALLDICT
+  }>
+  $__gen_get_get_wallet_address PROC:<{
+    __gen_load_Juicebox INLINECALLDICT
+    5 ROLL
+    $__gen_Juicebox_get_wallet_address INLINECALLDICT
+  }>
+  __gen_constructor_JettonData$totalSupply_mintable_owner_content_walletCode PROCINLINE:<{
+  }>
+  $__gen_Juicebox_get_jetton_data PROCREF:<{
+    MYADDR
+    $__gen_Juicebox_getJettonWalletInit INLINECALLDICT
+    1 2 BLKDROP2
+    __gen_StateInit_get_code INLINECALLDICT
+    s3 s3 s0 XCHG3
+    __gen_constructor_JettonData$totalSupply_mintable_owner_content_walletCode INLINECALLDICT
+  }>
+  $__gen_get_get_jetton_data PROC:<{
+    __gen_load_Juicebox INLINECALLDICT
+    $__gen_Juicebox_get_jetton_data INLINECALLDICT
+    __gen_JettonData_to_external INLINECALLDICT
+  }>
+  __gen_constructor_SendParameters$to_value_bounce_mode_body_code_data PROCINLINE:<{
+    s4 s6 XCHG
+    s4 s5 XCHG
+  }>
+  $__gen_Juicebox_mint PROCREF:<{
+    s7 s1 XCPU
+    ADD
+    5 2 BLKSWAP
+    $__gen_Juicebox_getJettonWalletInit INLINECALLDICT
+    2DUP
+    $contractAddress INLINECALLDICT
+    0 PUSHINT
+    FALSE
+    64 PUSHINT
+    s2 PUSH
+    MYADDR
+    OVER
+    $emptySlice INLINECALLDICT
+    s5 s15 XCHG
+    s3 s4 XCHG
+    s2 s3 XCHG
+    s2 16 s() XCHG
+    __gen_constructor_TokenTransferInternal$amount_queryId_from_responseAddress_forwardTonAmount_forwardPayload INLINECALLDICT
+    __gen_writecell_TokenTransferInternal INLINECALLDICT
+    s6 s5 s0 XCHG3
+    s4 s10 XCHG
+    s3 s11 XCHG
+    s0 s10 s11 XCHG3
+    __gen_constructor_SendParameters$to_value_bounce_mode_body_code_data INLINECALLDICT
+    $send INLINECALLDICT
+    2 3 BLKSWAP
+  }>
+  $__gen_Juicebox_requireWallet PROCREF:<{
+    __tact_context_get INLINECALLDICT
+    s2 s3 XCHG
+    3 BLKDROP
+    6 -ROLL
+    $__gen_Juicebox_getJettonWalletInit INLINECALLDICT
+    SWAP
+    4429 PUSHINT
+    s0 s2 XCHG
+    $contractAddress INLINECALLDICT
+    s0 s7 XCHG2
+    __tact_address_eq INLINECALLDICT
+    s1 s6 XCHG
+    THROWANYIFNOT
+    4 ROLL
+  }>
+  $__gen_Juicebox_requireOwner PROCREF:<{
+    __tact_context_get INLINECALLDICT
+    __gen_Context_get_sender INLINECALLDICT
+    s4 PUSH
+    __tact_address_eq INLINECALLDICT
+    132 THROWIFNOT
+  }>
+  $__gen_Juicebox_owner PROCREF:<{
+    s3 s4 XCHG
+    4 BLKDROP
+  }>
+  $__gen_get_owner PROC:<{
+    __gen_load_Juicebox INLINECALLDICT
+    $__gen_Juicebox_owner INLINECALLDICT
+  }>
+  $__gen_Juicebox_receive_comment_9d1f20fd138571b201f1cd0e2c813341ccf7045ff4cd72d87090ee0d56bc420a PROCINLINE:<{
+    __tact_context_get INLINECALLDICT
+    DROP
+    s2 POP
+    57673 PUSHINT
+    s3 PUSH
+    1 EQINT
+    THROWANYIFNOT
+    TUCK
+    $__gen_Juicebox_mint INLINECALLDICT
+  }>
+  $__gen_Juicebox_receive_comment_095190194aee611ce895c5503adf85fd864de7905746142f608d3eb2faad14e4 PROCINLINE:<{
+    54538 PUSHINT
+    OVER
+    0 EQINT
+    THROWANYIFNOT
+    49280 PUSHINT
+    __tact_context_get INLINECALLDICT
+    __gen_Context_get_sender INLINECALLDICT
+    s5 s(-1) PUXC
+    __tact_address_eq INLINECALLDICT
+    THROWANYIFNOT
+    __tact_my_balance INLINECALLDICT
+    __tact_context_get INLINECALLDICT
+    __gen_Context_get_sender INLINECALLDICT
+    2 PUSHINT
+    TRUE
+    B{b5ee9c7241010101000c00001457697468647261776e211cbe78be} B>boc <s PUSHSLICE
+    $__gen_String_asComment INLINECALLDICT
+    s3 s4 XCHG
+    __gen_constructor_SendParameters$to_value_mode_bounce_body INLINECALLDICT
+    $send INLINECALLDICT
+  }>
+  $__gen_Juicebox_receive_comment_001cb8d0f1dda451ba4491557c0ba97434ca5be2885df09f4513fdb2238af381 PROCINLINE:<{
+    57673 PUSHINT
+    SWAP
+    1 EQINT
+    THROWANYIFNOT
+    49280 PUSHINT
+    __tact_context_get INLINECALLDICT
+    __gen_Context_get_sender INLINECALLDICT
+    s4 s(-1) PUXC
+    __tact_address_eq INLINECALLDICT
+    THROWANYIFNOT
+    0 PUSHINT
+  }>
+  __gen_constructor_DeployOk$queryId PROCINLINE:<{
+  }>
+  $__gen_Juicebox_receive_Deploy PROCINLINE:<{
+    __gen_constructor_DeployOk$queryId INLINECALLDICT
+    __gen_writecell_DeployOk INLINECALLDICT
+    $reply INLINECALLDICT
+  }>
+  $__gen_Juicebox_receive_TokenUpdateContent PROCINLINE:<{
+    5 -ROLL
+    $__gen_Juicebox_requireOwner INLINECALLDICT
+    s2 POP
+    s3 s4 XCHG
+    s3 s0 s0 XCHG3
+  }>
+  __gen_constructor_SendParameters$to_value_bounce_mode_body PROCINLINE:<{
+    s2 s4 XCHG
+    s2 s3 XCHG
+    PUSHNULL
+    PUSHNULL
+  }>
+  $__gen_Juicebox_receive_TokenBurnNotification PROCINLINE:<{
+    s5 s8 XCHG
+    s4 s7 XCHG
+    s3 s6 XCHG
+    s8 s7 s7 XCHG3
+    $__gen_Juicebox_requireWallet INLINECALLDICT
+    s4 s7 XCHG2
+    SUB
+    s5 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      s0 s5 XCHG
+      __tact_not_null INLINECALLDICT
+      0 PUSHINT
+      FALSE
+      66 PUSHINT
+      s0 s7 XCHG
+      __gen_constructor_TokenExcesses$queryId INLINECALLDICT
+      __gen_writecell_TokenExcesses INLINECALLDICT
+      s3 s4 XCHG
+      s1 s3 s0 XCHG3
+      s1 s7 XCHG
+      __gen_constructor_SendParameters$to_value_bounce_mode_body INLINECALLDICT
+      $send INLINECALLDICT
+      s2 s3 XCHG
+    }>ELSE<{
+      s4 POP
+      s4 POP
+    }>
+    s4 s1 s3 XCHG3
+    s0 s2 XCHG
+  }>
+  __gen_router_Juicebox PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    0 PUSHINT
+    OVER
+    SBITS
+    31 GTINT
+    IF:<{
+      DROP
+      DUP
+      32 PLDU
+    }>
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+      TRUE
+    }>
+    OVER
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      __gen_read_Deploy INLINECALLDICT
+      NIP
+      $__gen_Juicebox_receive_Deploy INLINECALLDICT
+      TRUE
+    }>
+    OVER
+    201882270 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      __gen_read_TokenUpdateContent INLINECALLDICT
+      NIP
+      $__gen_Juicebox_receive_TokenUpdateContent INLINECALLDICT
+      TRUE
+    }>
+    OVER
+    2078119902 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      __gen_read_TokenBurnNotification INLINECALLDICT
+      1 4 BLKDROP2
+      $__gen_Juicebox_receive_TokenBurnNotification INLINECALLDICT
+      TRUE
+    }>
+    SWAP
+    0 EQINT
+    IF:<{
+      HASHSU
+      DUP
+      71068117165386386245586348011276402374951430845444877700246016813979076936202 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        $__gen_Juicebox_receive_comment_9d1f20fd138571b201f1cd0e2c813341ccf7045ff4cd72d87090ee0d56bc420a INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+      DUP
+      4214924782860224305093503934954653493962198591343413308822612294567774196964 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        $__gen_Juicebox_receive_comment_095190194aee611ce895c5503adf85fd864de7905746142f608d3eb2faad14e4 INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+      50747272281951462064349496134393354456678731753447841651508994563493262209 PUSHINT
+      EQUAL
+      IFJMP:<{
+        $__gen_Juicebox_receive_comment_001cb8d0f1dda451ba4491557c0ba97434ca5be2885df09f4513fdb2238af381 INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+    }>ELSE<{
+      DROP
+    }>
+    FALSE
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    4 LDU
+    SWAP
+    1 PUSHINT
+    AND
+    1 EQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    SWAP
+    LDMSGADDR
+    s2 PUSH
+    s5 s5 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    __gen_load_Juicebox INLINECALLDICT
+    2 5 BLKSWAP
+    __gen_router_Juicebox INLINECALLDICT
+    DROP
+    __gen_store_Juicebox INLINECALLDICT
+  }>
+  supported_interfaces PROC:<{
+    123515602279859691144772641439386770278 PUSHINT
+    209801025412363888721030803524359905849 PUSHINT
+    42980537499636128163026532310500881091 PUSHINT
+    258390863389042349688353801369539695109 PUSHINT
+    86142586315491086060343270784266291122 PUSHINT
+  }>
+  get_abi_ipfs PROC:<{
+    x{697066733a2f2f516d557954386e615478444541744d57367552764c74566d677439764556645a3274535779454d754d614a544e57} PUSHSLICE
+  }>
+  lazy_deployment_completed PROC:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+  }>
+}END>c
